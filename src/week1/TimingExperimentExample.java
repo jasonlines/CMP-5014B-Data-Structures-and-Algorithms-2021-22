@@ -50,7 +50,7 @@ public class TimingExperimentExample {
         return output;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
 
         // Here we will run some practical timing experiments. The objective here is to start with a very simple (but
         // crude) experiment and incrementally improve upon our procedure. As discussed in the lecture, it's best to
@@ -85,27 +85,18 @@ public class TimingExperimentExample {
         //         experiments (as it is a linear algorithm the output will be quite boring on this occasion, but you
         //         can try similar with the srting algorithms in the week 1 lab exercises to see what happens there)
 
-
-//        System.out.println("Experiment 1:");
-//        experiment1();
-//        System.out.println("------------\n");
-
-//        System.out.println("Experiment 2:");
-//        experiment2();
-//        System.out.println("------------\n");
-
-//        System.out.println("Experiment 3:");
-//        experiment3();
-//        System.out.println("------------\n");
-
-//        System.out.println("Experiment 4:");
-//        experiment4();
-//        System.out.println("------------\n");
-
-        System.out.println("Experiment 5:");
-        experiment5();
-        System.out.println("------------\n");
-
+        // please note: to see the cold start problem properly then only run one experiment at a time
+        // You can do this below by changing experimentToRun to be either 1, 2, 3, 4 or 5
+        int experimentToRun = 1; // set this to be 1-5
+        System.out.println("Experiment "+experimentToRun+":");
+        switch (experimentToRun) {
+            case 1 -> experiment1();    // very simple, small data, no repetitions
+            case 2 -> experiment2();    // similar to #1 but using a better range of values
+            case 3 -> experiment3();    // builds on #2 to include repetitions for each input value
+            case 4 -> experiment4();    // builds on #3 to get rid of the "cold start" problem
+            case 5 -> experiment5();    // a final experiment looking at fundamental ops rather than timing results
+            default -> throw new Exception("Please make sure you set experimentToRun to a value between 1-5 inc.");
+        }
     }
 
     // very simple experiment (no repetitions, small data size, cold start)
